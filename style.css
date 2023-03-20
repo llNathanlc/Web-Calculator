@@ -2,9 +2,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2vw;
+    font-size: 1.3vw;
     background-color: rgb(219, 159, 86);
-    color:rgb(23, 59, 61);
+    color:rgb(248, 248, 248);
     font-weight: bolder;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -32,45 +32,61 @@ body {
     width:75%;
     height:100%;
     box-shadow:#626264;
-    gap:10px;
+    gap:1vw;
     border-radius: 10%;
     box-shadow: 9px 9px 9px rgb(5, 5, 8);
-    padding:40px;
+    padding:2vw;
 }
 .buttons{
     display: flex;
     flex-direction: column;
-    gap:15px;
+    gap:1.5vw;
 }
 .operation,
 .number {
     display: flex;
     justify-content: center;
     align-items: center;
-    width:6vw;
-    height:7vw;
-    background-color: rgb(214, 219, 216);
-    border: rgb(23, 59, 61) solid 2px;
-    border-radius: 30%;
-    box-shadow: 5px 3px 0 rgb(90, 88, 88);
+    width:4.5vw;
+    height:4vw;
+    background-color: rgb(37, 39, 37);
+    border-radius: 100%;
+    box-shadow: 0 5px 5px rgb(10, 8, 8);
+}
+.operation{
+    background-color: rgb(29, 29, 29);
+    color:rgb(255, 255, 255);
 }
 .result{
     display: flex;
     flex-direction: column;
-    justify-content:end;
-    align-items: end;
-    overflow: hidden;
+    justify-content:center;
+    align-items: center;
     width:100%;
     height:5vw;
-    padding-right:9px;
-    background-color: rgb(183, 189, 194);
-    border-radius: 10px;
-    margin-bottom: 30px;
+    padding-right:2vw;
+    padding-top:4vw;
+    padding-bottom: 1vw;
+    color:white;
+    font-style: italic;
+    font-size: 1.5vw;
+    border-radius: 40%;
+    background-color: rgb(37, 39, 37);
+    margin-bottom: 2vw;
+}
+#result2{
+    margin-top:0.5vw;
+    font-size: 2.5vw;
+}
+#equals{
+    background-color: #9c9c9c;
+    color: rgb(37, 39, 37);
+    font-size: 2.6vw;
 }
 .row0,
 .row1,
 .row2,
 .row3,.row4 {
     display: flex;
-    gap:15px;
+    gap:1.5vw;
 }
