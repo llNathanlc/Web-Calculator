@@ -2,10 +2,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size:xx-large;
+    font-size: 2vw;
     background-color: rgb(219, 159, 86);
     color:rgb(23, 59, 61);
     font-weight: bolder;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .container {
@@ -23,12 +29,12 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     background-color: rgb(37, 39, 37);
-    width:85%;
+    width:75%;
     height:100%;
     box-shadow:#626264;
     gap:10px;
     border-radius: 10%;
-    box-shadow: 4px 4px 4px rgb(5, 5, 8);
+    box-shadow: 9px 9px 9px rgb(5, 5, 8);
     padding:40px;
 }
 .buttons{
@@ -45,7 +51,7 @@ body {
     height:7vw;
     background-color: rgb(214, 219, 216);
     border: rgb(23, 59, 61) solid 2px;
-    border-radius: 10%;
+    border-radius: 30%;
     box-shadow: 5px 3px 0 rgb(90, 88, 88);
 }
 .result{
