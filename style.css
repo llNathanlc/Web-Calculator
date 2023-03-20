@@ -2,8 +2,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.3vw;
-    background-color: rgb(219, 159, 86);
+    font-size: 1.4rem;
+    background-color: rgb(170, 164, 158);
     color:rgb(248, 248, 248);
     font-weight: bolder;
     -webkit-touch-callout: none;
@@ -29,29 +29,29 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     background-color: rgb(37, 39, 37);
-    width:75%;
-    height:100%;
+    width:17rem;
+    height:34rem;
     box-shadow:#626264;
-    gap:1vw;
-    border-radius: 10%;
+    gap:1rem;
+    border-radius: 8%;
     box-shadow: 9px 9px 9px rgb(5, 5, 8);
-    padding:2vw;
+    padding:1.7rem;
 }
 .buttons{
     display: flex;
     flex-direction: column;
-    gap:1.5vw;
+    gap:1.5rem;
 }
 .operation,
 .number {
     display: flex;
     justify-content: center;
     align-items: center;
-    width:4.5vw;
-    height:4vw;
+    width:4rem;
+    height:3.3rem;
     background-color: rgb(37, 39, 37);
     border-radius: 100%;
-    box-shadow: 0 5px 5px rgb(10, 8, 8);
+    box-shadow: 0 5px 12px rgb(10, 8, 8);
 }
 .operation{
     background-color: rgb(29, 29, 29);
@@ -63,30 +63,40 @@ body {
     justify-content:center;
     align-items: center;
     width:100%;
-    height:5vw;
-    padding-right:2vw;
-    padding-top:4vw;
-    padding-bottom: 1vw;
+    height:5rem;
+    padding-top:2rem;
+    padding-bottom: 1rem;
     color:white;
     font-style: italic;
-    font-size: 1.5vw;
+    font-size: 1.2rem;
     border-radius: 40%;
     background-color: rgb(37, 39, 37);
-    margin-bottom: 2vw;
 }
 #result2{
-    margin-top:0.5vw;
-    font-size: 2.5vw;
+    margin-top:0.5rem;
+    font-size: 2.1rem;
 }
 #equals{
     background-color: #9c9c9c;
     color: rgb(37, 39, 37);
-    font-size: 2.6vw;
+    font-size: 2.6rem;
 }
-.row0,
-.row1,
-.row2,
-.row3,.row4 {
+#delete{
+    background:url('icons/backspace.jpg');
+    background-size:2.2rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgb(29, 29, 29);
+}
+#ansresult{
+    align-self: flex-start;
+    color:#9c9c9c;
+    color:rgb(87, 86, 86);
+}
+.row{
     display: flex;
-    gap:1.5vw;
+    gap:1.5rem;
+}
+#row0{
+    
 }

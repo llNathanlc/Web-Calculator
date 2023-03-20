@@ -12,6 +12,7 @@ const percentageButton = document.getElementById('percentage');
 const equalsButton = document.getElementById('equals');
 const ansButton = document.getElementById('anterior');
 const pointButton = document.getElementById('point');
+const ansText = document.getElementById('ansresult');
 
 
 let savedString = '';
@@ -26,13 +27,13 @@ let pointActive = true;
 
 function buttonsAnimation() {
     buttons.forEach(button => {
-        button.addEventListener('mousedown', function () {
+        button.addEventListener('pointerdown', function () {
             this.classList.add('click');
         });
-        button.addEventListener('mouseup', function () {
+        button.addEventListener('pointerup', function () {
             this.classList.remove('click');
         })
-        button.addEventListener('mouseover', function () {
+        button.addEventListener('pointerover', function () {
             this.classList.add('hover');
         });
         button.addEventListener('mouseleave', function () {
@@ -71,37 +72,38 @@ function functions() {
 function operationButtons() {
     //Get numbers
     numbers.forEach(numberButton => {
-        numberButton.addEventListener('mousedown', numberButtonsLogic);
+        numberButton.addEventListener('pointerdown', numberButtonsLogic);
     });
 
-    resetButton.addEventListener('mousedown', function () {
+    resetButton.addEventListener('pointerdown', function () {
         savedString = '';
         anteriorNumber = '';
         ans = 0;
         result = 0;
         result1.textContent = '';
         result2.textContent = '0';
+        ansText.textContent='';
         resetArray(array);
         resetArray(auxArray);
-        addListener(pointButton, 'mousedown');
+        addListener(pointButton, 'pointerdown');
     });
 
-    addButton.addEventListener('mousedown', operationButtonsLogic,);
+    addButton.addEventListener('pointerdown', operationButtonsLogic,);
 
-    substractButton.addEventListener('mousedown', operationButtonsLogic);
+    substractButton.addEventListener('pointerdown', operationButtonsLogic);
 
-    multiplyButton.addEventListener('mousedown', operationButtonsLogic);
+    multiplyButton.addEventListener('pointerdown', operationButtonsLogic);
 
-    divideButton.addEventListener('mousedown', operationButtonsLogic);
+    divideButton.addEventListener('pointerdown', operationButtonsLogic);
 
-    percentageButton.addEventListener('mousedown', operationButtonsLogic);
+    percentageButton.addEventListener('pointerdown', operationButtonsLogic);
 
-    addListener(pointButton, 'mousedown');
-    pointButton.addEventListener('mouseup', function () {
+    addListener(pointButton, 'pointerdown');
+    pointButton.addEventListener('pointerup', function () {
         removeListener();
     });
 
-    equalsButton.addEventListener('mousedown', function () {
+    equalsButton.addEventListener('pointerdown', function () {
         if (anteriorNumber != '') {
             array.push(parseFloat(anteriorNumber));
         }
@@ -112,12 +114,15 @@ function operationButtons() {
         result2.textContent = result;
         result1.textContent = savedString;
         result1.textContent += '=';
+        ansText.textContent = 'Ans=  ' + ans;
         savedString = '';
-        addListener(pointButton, 'mousedown');
+        addListener(pointButton, 'pointerdown');
     });
 
-    deleteButton.addEventListener('mousedown', function () {
-
+    deleteButton.addEventListener('pointerdown', function () {
+        if (anteriorNumber != '') {
+            array.push(parseFloat(anteriorNumber));
+        }
         if (array.length == 0) {
             array = auxArray.slice(0);
             resetArray(auxArray);
@@ -131,10 +136,6 @@ function operationButtons() {
             }
             result2.textContent = savedString; 
             return;
-        }
-
-        if (anteriorNumber != '') {
-            array.push(parseFloat(anteriorNumber));
         }
         anteriorNumber = '';
         if (isNaN(array[array.length - 1])) { array.pop(); }
@@ -154,13 +155,13 @@ function operationButtons() {
 
     });
 
-    ansButton.addEventListener('mousedown', function () {
+    ansButton.addEventListener('pointerdown', function () {
         if (ans == 0) { return; }
         anteriorNumber += ans;
         savedString += ans;
         result1.textContent = '';
         result2.textContent = savedString;
-        addListener(pointButton, 'mousedown');
+        addListener(pointButton, 'pointerdown');
     });
 }
 
@@ -200,7 +201,7 @@ function operationButtonsLogic() {
     savedString += this.textContent;
     result2.textContent = savedString;
     result1.textContent = "";
-    addListener(pointButton, 'mousedown');
+    addListener(pointButton, 'pointerdown');
 }
 
 function resetArray(arr) {
