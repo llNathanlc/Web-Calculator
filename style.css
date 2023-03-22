@@ -88,6 +88,7 @@ body {
     background-position: center;
     background-color: rgb(29, 29, 29);
 }
+
 #ansresult{
     align-self: flex-start;
     color:#9c9c9c;
@@ -96,4 +97,10 @@ body {
 .row{
     display: flex;
     gap:1.5rem;
+}
+.row0{
+    width:6rem;
+    height:1.9rem;
+    border-radius: 40%;
+    background-color:rgb(29, 29, 29);
 }
