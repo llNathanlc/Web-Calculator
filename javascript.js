@@ -26,6 +26,7 @@ let anteriorNumber = '';
 let ans = 0;
 let result = 0;
 let operation = '';
+let bracketArr = [];
 let array = [];
 let auxArray = [];
 let pointActive = true;
@@ -50,20 +51,79 @@ function buttonsAnimation() {
 
 function functions() {
     let aux;
-    let bracketArr;
     let resAux;
     let operIndex = 0;
     let exponent;
+    let findleftBracket;
+    let findrightBracket;
     if (array[0] == '-') { array.splice(0, 2, -array[1]); }
-    if(array.includes('(') || array.includes(')')) {
-        if(array.includes('(') && !array.includes(')') || !array.includes('(') && array.includes(')') ){result2.textContent == 'SYNTAX ERROR';}
-        findleftBracket = array.findIndex( lb => lb == '(');
+    while(array.includes('(') || array.includes(')')) {
+        if (array.includes('(') && !array.includes(')') || !array.includes('(') && array.includes(')')) { result2.textContent == 'SYNTAX ERROR'; }
+        findleftBracket = array.findIndex(lb => lb == '(');
         findrightBracket = array.findIndex(rb => rb == ')');
-        bracketArr = array.splice(findleftBracket,findrightBracket+1);
+        console.log(findrightBracket);
+        bracketArr = array.splice(findleftBracket, findrightBracket + 1);
+        bracketArr.pop();
+        bracketArr.shift();
+        console.log('bracketarr = ');
+        console.log(bracketArr);
+        console.log('---');
+        let auxb;
+        let resAuxb;
+        let operIndexb = 0;
+        let exponentb;
+        let resultb = 0;
+        if (bracketArr[0] == '-') { bracketArr.splice(0, 2, -bracketArr[1]); }
+        while (bracketArr.includes('%') || bracketArr.includes('^') || bracketArr.includes('√')) {
+            if (bracketArr.includes('%')) {
+                findPercentage = bracketArr.findIndex(perc => perc == '%');
+                bracketArr.splice(findPercentage, 1, '/', 100);
+            }
+            if (bracketArr.includes('√')) {
+                findRoot = bracketArr.findIndex(perc => perc == '√');
+                bracketArr.splice(findRoot, 2, bracketArr[findRoot + 1], '^', 0.5);
+            }
+            operIndexb = bracketArr.findIndex(op => op == '/' || op == '^');
+            auxb = bracketArr.splice(operIndexb - 1, 3);
+            while (auxb.length > 0) {
+                resAuxb = auxb.shift();
+                if (auxb[0] === '^') {
+                    auxb.shift();
+                    exponentb = auxb.shift();
+                    resAuxb = Math.pow(resAuxb, exponentb);
+                    bracketArr.splice(operIndexb - 1, 0, resAuxb);
+                }
+                else if (auxb[0] === '/') { auxb.shift(); resAuxb /= auxb.shift(); bracketArr.splice(operIndexb - 1, 0, resAuxb); console.log(bracketArr); }
+            }
+        }
+        while (bracketArr.includes('x') || bracketArr.includes('/')) {
+            console.log(bracketArr);
+            operIndexb = bracketArr.findIndex(op => op == 'x' || op == '/' || op == '^');
+            auxb = bracketArr.splice(operIndexb - 1, 3);
+            while (auxb.length > 0) {
+                resAuxb = auxb.shift();
+                if (auxb[0] === '^') {
+                    auxb.shift();
+                    exponentb = auxb.shift();
+                    resAuxb = Math.pow(resAuxb, exponentb);
+                    bracketArr.splice(operIndexb - 1, 0, resAuxb);
+                }
+                else if (auxb[0] === 'x') { auxb.shift(); resAuxb *= auxb.shift(); bracketArr.splice(operIndexb - 1, 0, resAuxb); console.log(bracketArr); }
+                else if (auxb[0] === '/') { auxb.shift(); resAuxb /= auxb.shift(); bracketArr.splice(operIndexb - 1, 0, resAuxb); console.log(bracketArr); }
+            }
+        }
+        while (bracketArr.length > 0) {
+            resultb = bracketArr.shift();
+            if (bracketArr[0] === '+') { bracketArr.shift(); resultb += bracketArr.shift(); bracketArr.unshift(resultb); console.log(bracketArr); }
+            else if (bracketArr[0] === '-') { bracketArr.shift(); resultb -= bracketArr.shift(); bracketArr.unshift(resultb); console.log(bracketArr); }
+        }
+        console.log('bracketarr = ');
+        console.log(bracketArr);
+        console.log('---');
+        array.splice(findleftBracket, 0, resultb);
     }
-    console.log('bracketarr = ');
-    console.log(bracketArr);
-    console.log('---');
+
+    if (array[0] == '-') { array.splice(0, 2, -array[1]); }
     while (array.includes('%') || array.includes('^') || array.includes('√')) {
         if (array.includes('%')) {
             findPercentage = array.findIndex(perc => perc == '%');
@@ -163,7 +223,18 @@ function operationButtons() {
         addListener(pointButton, 'pointerdown');
     });
 
-    exponentButton.addEventListener('pointerdown', operationButtonsLogic);
+    exponentButton.addEventListener('pointerdown',function(){
+        if (result2.textContent.length > 18) { return; }
+        if (anteriorNumber != '') {
+            array.push(parseFloat(anteriorNumber));
+        }
+        array.push(this.textContent);
+        anteriorNumber = '';
+        savedString += this.textContent;
+        result2.textContent = savedString;
+        result1.textContent = "";
+        addListener(pointButton, 'pointerdown');
+    });
 
     sqrtButton.addEventListener('pointerdown', function () {
         if (result2.textContent.length > 18) { return; }
@@ -179,14 +250,16 @@ function operationButtons() {
     })
 
     piButton.addEventListener('pointerdown', function () {
-        anteriorNumber += Math.PI;
+        if (anteriorNumber != '') { anteriorNumber *= Math.PI; }
+        else { anteriorNumber += Math.PI; }
         savedString += 'π';
         result1.textContent = '';
         result2.textContent = savedString;
     });
 
     eButton.addEventListener('pointerdown', function () {
-        anteriorNumber += Math.E;
+        if (anteriorNumber != '') { anteriorNumber *= Math.E; }
+        else { anteriorNumber += Math.E; }
         savedString += this.textContent;
         result1.textContent = '';
         result2.textContent = savedString;
@@ -283,7 +356,9 @@ function removeListener() {
 
 function numberButtonsLogic() {
     if (result2.textContent.length > 18) { return; }
-    anteriorNumber += this.textContent;
+    if (anteriorNumber == Math.PI) { anteriorNumber *= this.textContent; }
+    else if (anteriorNumber == Math.E) { anteriorNumber *= this.textContent; }
+    else { anteriorNumber += this.textContent; }
     savedString += this.textContent;
     result1.textContent = '';
     result2.textContent = savedString;
@@ -303,8 +378,8 @@ function operationButtonsLogic() {
     addListener(pointButton, 'pointerdown');
 }
 
-function resetArray(arr) {
-    while (arr.length != 0) { arr.pop(); }
+function resetArray(array) {
+    while (array.length != 0) { array.pop(); }
 }
 
 function start() {
